@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Namesake sign in for the FashionFunks demo store.">
     <title>Sign in · FashionFunks</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+    <base href="../../">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <script src="src/scripts/storefront.js" defer></script>
 </head>
 <body>
     <div class="announcement">Namesake account · No password required</div>
     <header class="site-header"><div class="header-inner container">
         <a class="brand" href="index.html"><span class="brand-mark">FF</span><span>FASHIONFUNKS</span></a>
-        <nav class="primary-nav" aria-label="Primary navigation"><a href="shop.html">Shop</a><a href="web.html">Lookbook</a><a href="cart.html">Your bag</a></nav>
-        <div class="header-actions"><a class="icon-link" href="cart.html" aria-label="Shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" data-cart-count hidden>0</span></a><button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div>
+        <nav class="primary-nav" aria-label="Primary navigation"><a href="src/pages/shop.html">Shop</a><a href="src/pages/lookbook.html">Lookbook</a><a href="src/pages/cart.html">Your bag</a></nav>
+        <div class="header-actions"><a class="icon-link" href="src/pages/cart.html" aria-label="Shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" data-cart-count hidden>0</span></a><button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div>
     </div></header>
     <main class="auth-layout">
         <section class="auth-visual"><div class="auth-copy"><p class="eyebrow">Your wardrobe, remembered</p><h1>Welcome to your edit.</h1></div></section>

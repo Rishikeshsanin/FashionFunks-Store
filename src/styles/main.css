@@ -215,7 +215,7 @@ button {
     position: relative;
     min-height: min(720px, calc(100svh - 112px));
     overflow: hidden;
-    background: #eee4d5 url("hero-editorial.png") 50% 35% / cover no-repeat;
+    background: #eee4d5 url("../../public/assets/images/editorial/hero-campaign.png") 50% 35% / cover no-repeat;
 }
 
 .hero::after {
@@ -629,7 +629,7 @@ button {
 
 .editorial-visual {
     min-height: 520px;
-    background: #edf0f5 url("hero-2.png") center 25% / cover no-repeat;
+    background: #edf0f5 url("../../public/assets/images/products/rouge-statement-jacket.png") center 25% / cover no-repeat;
 }
 
 .editorial-copy {
@@ -1302,7 +1302,7 @@ button {
 .auth-visual {
     position: relative;
     min-height: 620px;
-    background: #e6dfd3 url("hero-editorial.png") 67% center / cover no-repeat;
+    background: #e6dfd3 url("../../public/assets/images/editorial/hero-campaign.png") 67% center / cover no-repeat;
 }
 
 .auth-visual::after {
@@ -1374,7 +1374,7 @@ button {
     place-items: end start;
     overflow: hidden;
     color: var(--white);
-    background: #111 url("hero-editorial.png") center 30% / cover no-repeat;
+    background: #111 url("../../public/assets/images/editorial/hero-campaign.png") center 30% / cover no-repeat;
 }
 
 .lookbook-hero::after {

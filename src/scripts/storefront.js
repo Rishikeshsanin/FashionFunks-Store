@@ -5,7 +5,7 @@ const PRODUCTS = [
         category: "Men",
         type: "Shirts",
         price: 1899,
-        image: "srt1.webp",
+        image: "public/assets/images/products/mens-oxford-shirt.webp",
         badge: "New",
         sizes: ["S", "M", "L", "XL"],
         rating: 4.8,
@@ -18,7 +18,7 @@ const PRODUCTS = [
         category: "Men",
         type: "Shirts",
         price: 2099,
-        image: "srt2.webp",
+        image: "public/assets/images/products/mens-coastal-stripe-shirt.webp",
         badge: "Bestseller",
         sizes: ["S", "M", "L", "XL"],
         rating: 4.9,
@@ -32,7 +32,7 @@ const PRODUCTS = [
         category: "Men",
         type: "Layers",
         price: 2499,
-        image: "srt6.webp",
+        image: "public/assets/images/products/mens-sand-overshirt.webp",
         badge: "Limited",
         sizes: ["M", "L", "XL"],
         rating: 4.7,
@@ -45,7 +45,7 @@ const PRODUCTS = [
         category: "Women",
         type: "Tops",
         price: 1599,
-        image: "wn4.webp",
+        image: "public/assets/images/products/sculpted-rib-top.webp",
         badge: "New",
         sizes: ["XS", "S", "M", "L"],
         rating: 4.8,
@@ -59,7 +59,7 @@ const PRODUCTS = [
         category: "Women",
         type: "Tops",
         price: 1799,
-        image: "wn5.webp",
+        image: "public/assets/images/products/cobalt-poplin-top.webp",
         badge: "Trending",
         sizes: ["XS", "S", "M", "L", "XL"],
         rating: 4.9,
@@ -72,7 +72,7 @@ const PRODUCTS = [
         category: "Women",
         type: "Tops",
         price: 1999,
-        image: "wn6.webp",
+        image: "public/assets/images/products/soft-form-blouse.webp",
         sizes: ["XS", "S", "M", "L"],
         rating: 4.6,
         description: "Fluid fabric and gentle tailoring meet in a polished blouse that feels as relaxed as it looks refined."
@@ -83,7 +83,7 @@ const PRODUCTS = [
         category: "Unisex",
         type: "T-Shirts",
         price: 1299,
-        image: "tr3.webp",
+        image: "public/assets/images/products/lilac-studio-tee.webp",
         badge: "Unisex",
         sizes: ["XS", "S", "M", "L", "XL"],
         rating: 4.8,
@@ -96,7 +96,7 @@ const PRODUCTS = [
         category: "Unisex",
         type: "Outerwear",
         price: 3499,
-        image: "mian2.png",
+        image: "public/assets/images/products/noir-city-jacket.png",
         badge: "Editor’s pick",
         sizes: ["S", "M", "L"],
         rating: 4.9,
@@ -110,7 +110,7 @@ const PRODUCTS = [
         category: "Women",
         type: "Outerwear",
         price: 3799,
-        image: "hero-2.png",
+        image: "public/assets/images/products/rouge-statement-jacket.png",
         badge: "Statement",
         sizes: ["XS", "S", "M", "L"],
         rating: 4.7,
@@ -122,7 +122,7 @@ const PRODUCTS = [
         category: "Women",
         type: "Dresses",
         price: 4299,
-        image: "tr1.webp",
+        image: "public/assets/images/products/ivory-occasion-dress.webp",
         badge: "Occasion",
         sizes: ["XS", "S", "M", "L"],
         rating: 4.9,
@@ -243,7 +243,7 @@ function productCard(product) {
     return `
         <article class="product-card">
             <div class="product-media">
-                <a href="product.html?id=${encodeURIComponent(product.id)}" aria-label="View ${escapeHTML(product.name)}">
+                <a href="src/pages/product.html?id=${encodeURIComponent(product.id)}" aria-label="View ${escapeHTML(product.name)}">
                     <img class="${fitClass}" src="${product.image}" alt="${escapeHTML(product.name)}" loading="lazy">
                 </a>
                 ${badge}
@@ -253,7 +253,7 @@ function productCard(product) {
             </div>
             <div class="product-info">
                 <span class="product-category">${product.category} · ${product.type}</span>
-                <a class="product-name" href="product.html?id=${encodeURIComponent(product.id)}">${product.name}</a>
+                <a class="product-name" href="src/pages/product.html?id=${encodeURIComponent(product.id)}">${product.name}</a>
                 <span class="product-price">${formatMoney(product.price)}</span>
             </div>
         </article>`;
@@ -409,7 +409,7 @@ function initProductPage() {
     root.innerHTML = `
         <div class="breadcrumbs">
             <a href="index.html">Home</a><span>/</span>
-            <a href="shop.html?category=${encodeURIComponent(product.category)}">${product.category}</a><span>/</span>
+            <a href="src/pages/shop.html?category=${encodeURIComponent(product.category)}">${product.category}</a><span>/</span>
             <span>${product.name}</span>
         </div>
         <div class="product-detail">
@@ -462,7 +462,7 @@ function renderCart() {
             <div class="empty-state">
                 <h2>Your bag is ready for a first pick</h2>
                 <p>Explore the new edit and add a piece you’ll reach for again and again.</p>
-                <a class="button button-primary" href="shop.html">Shop the collection</a>
+                <a class="button button-primary" href="src/pages/shop.html">Shop the collection</a>
             </div>`;
         summaryRoot.innerHTML = "";
         return;
@@ -475,12 +475,12 @@ function renderCart() {
                 const fitClass = product.fit === "contain" ? "is-contain" : "";
                 return `
                     <article class="cart-item">
-                        <a class="cart-item-image" href="product.html?id=${product.id}">
+                        <a class="cart-item-image" href="src/pages/product.html?id=${product.id}">
                             <img class="${fitClass}" src="${product.image}" alt="${escapeHTML(product.name)}">
                         </a>
                         <div class="cart-item-info">
                             <span class="product-category">${product.category} · ${product.type}</span>
-                            <h3><a href="product.html?id=${product.id}">${product.name}</a></h3>
+                            <h3><a href="src/pages/product.html?id=${product.id}">${product.name}</a></h3>
                             <p>Size ${item.size}</p>
                             <div class="quantity-control" aria-label="Quantity for ${escapeHTML(product.name)}">
                                 <button type="button" data-cart-quantity="-1" data-cart-id="${product.id}" data-cart-size="${item.size}" aria-label="Decrease quantity">−</button>
@@ -498,7 +498,7 @@ function renderCart() {
 
     const subtotal = getSubtotal();
     const shipping = getShipping(subtotal);
-    summaryRoot.innerHTML = summaryMarkup(subtotal, shipping, "checkout.html", "Continue to checkout");
+    summaryRoot.innerHTML = summaryMarkup(subtotal, shipping, "src/pages/checkout.html", "Continue to checkout");
 }
 
 function summaryMarkup(subtotal, shipping, buttonHref, buttonText) {
@@ -551,7 +551,7 @@ function initCheckout() {
             <div class="empty-state">
                 <h2>There’s nothing to order yet</h2>
                 <p>Add something to your bag, then come back for the one-click demo checkout.</p>
-                <a class="button button-primary" href="shop.html">Go to shop</a>
+                <a class="button button-primary" href="src/pages/shop.html">Go to shop</a>
             </div>`;
         summaryRoot.innerHTML = "";
         orderButton.hidden = true;
@@ -585,7 +585,7 @@ function initCheckout() {
         };
         localStorage.setItem(ORDER_KEY, JSON.stringify(order));
         localStorage.removeItem(CART_KEY);
-        window.location.href = "order-success.html";
+        window.location.href = "src/pages/order-success.html";
     });
 }
 
@@ -606,7 +606,7 @@ function initSuccess() {
                 <div class="success-icon">✓</div>
                 <h1>You’re all set.</h1>
                 <p>This page is ready for your next demo order.</p>
-                <div class="button-row"><a class="button button-primary" href="shop.html">Start shopping</a></div>
+                <div class="button-row"><a class="button button-primary" href="src/pages/shop.html">Start shopping</a></div>
             </div>`;
         return;
     }
@@ -619,7 +619,7 @@ function initSuccess() {
             <p>Your demo order for ${order.itemCount} ${order.itemCount === 1 ? "piece" : "pieces"} has been placed. No payment was collected and no personal information was needed.</p>
             <div class="order-chip">ORDER ${escapeHTML(order.number)} · ${formatMoney(order.total)}</div>
             <div class="button-row">
-                <a class="button button-primary" href="shop.html">Keep exploring</a>
+                <a class="button button-primary" href="src/pages/shop.html">Keep exploring</a>
                 <a class="button button-secondary" href="index.html">Back home</a>
             </div>
         </div>`;
