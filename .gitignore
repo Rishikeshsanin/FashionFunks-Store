@@ -21,3 +21,21 @@ Thumbs.db
 .cache/
 .tmp/
 work/
+# dependencies and build output
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+
+# local configuration
+.env*
+!.env.example
+.npm-cache/
+
+# editor and operating system files
+.DS_Store
+Thumbs.db
+*.log
+*.tsbuildinfo

@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import { InfoPage, InfoSection } from "@/components/info-page";
+
+export const metadata: Metadata = { title: "Size guide" };
+const rows = [["XS", "81–86", "64–69", "86–91"], ["S", "86–91", "69–74", "91–97"], ["M", "91–99", "74–81", "97–104"], ["L", "99–107", "81–89", "104–112"], ["XL", "107–117", "89–99", "112–122"], ["XXL", "117–127", "99–109", "122–132"]];
+export default function Page() { return <InfoPage eyebrow="Find your fit" title="Size guide." intro="Use body measurements as a starting point. Each product page also describes its intended fit."><InfoSection title="Adult clothing"><div className="table-scroll"><table><thead><tr><th>Size</th><th>Chest / bust (cm)</th><th>Waist (cm)</th><th>Hip (cm)</th></tr></thead><tbody>{rows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></div></InfoSection><InfoSection title="How to measure"><div className="measure-grid"><p><strong>Chest / bust</strong>Measure around the fullest part, keeping the tape level.</p><p><strong>Waist</strong>Measure around your natural waist without pulling tight.</p><p><strong>Hip</strong>Stand with feet together and measure the fullest part.</p></div><p>Between sizes? Choose the larger size for a relaxed fit or the smaller size for a closer fit.</p></InfoSection></InfoPage>; }
