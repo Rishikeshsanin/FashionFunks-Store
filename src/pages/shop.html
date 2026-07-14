@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Shop the FashionFunks collection for women, men and unisex style.">
     <title>Shop all · FashionFunks</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+    <base href="../../">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <script src="src/scripts/storefront.js" defer></script>
 </head>
 <body>
     <div class="announcement">Free delivery above ₹2,999 · Easy 15-day returns</div>
     <header class="site-header"><div class="header-inner container">
         <a class="brand" href="index.html" aria-label="FashionFunks home"><span class="brand-mark">FF</span><span>FASHIONFUNKS</span></a>
-        <nav class="primary-nav" aria-label="Primary navigation"><a href="shop.html" aria-current="page">New in</a><a href="shop.html?category=Women">Women</a><a href="shop.html?category=Men">Men</a><a href="shop.html?category=Unisex">Unisex</a><a href="web.html">Lookbook</a></nav>
+        <nav class="primary-nav" aria-label="Primary navigation"><a href="src/pages/shop.html" aria-current="page">New in</a><a href="src/pages/shop.html?category=Women">Women</a><a href="src/pages/shop.html?category=Men">Men</a><a href="src/pages/shop.html?category=Unisex">Unisex</a><a href="src/pages/lookbook.html">Lookbook</a></nav>
         <div class="header-actions">
             <a class="icon-link" href="#search" aria-label="Search products"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></a>
-            <a class="icon-link account-link" href="login.html" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"></path></svg><span class="account-name" data-account-label>Account</span></a>
-            <a class="icon-link" href="cart.html" aria-label="Shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" data-cart-count hidden>0</span></a>
+            <a class="icon-link account-link" href="src/pages/login.html" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"></path></svg><span class="account-name" data-account-label>Account</span></a>
+            <a class="icon-link" href="src/pages/cart.html" aria-label="Shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" data-cart-count hidden>0</span></a>
             <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
         </div>
     </div></header>
@@ -39,8 +40,8 @@
 
     <footer class="site-footer"><div class="footer-grid container">
         <div class="footer-about"><a class="brand footer-brand" href="index.html"><span class="brand-mark">FF</span><span>FASHIONFUNKS</span></a><p class="footer-intro">Modern clothing for every version of you. Designed as a vibrant demo shopping experience.</p></div>
-        <div class="footer-column"><h3>Shop</h3><div class="footer-links"><a href="shop.html">New in</a><a href="shop.html?category=Women">Women</a><a href="shop.html?category=Men">Men</a><a href="shop.html?category=Unisex">Unisex</a></div></div>
-        <div class="footer-column"><h3>Discover</h3><div class="footer-links"><a href="web.html">Lookbook</a><a href="login.html">Your account</a><a href="cart.html">Shopping bag</a></div></div>
+        <div class="footer-column"><h3>Shop</h3><div class="footer-links"><a href="src/pages/shop.html">New in</a><a href="src/pages/shop.html?category=Women">Women</a><a href="src/pages/shop.html?category=Men">Men</a><a href="src/pages/shop.html?category=Unisex">Unisex</a></div></div>
+        <div class="footer-column"><h3>Discover</h3><div class="footer-links"><a href="src/pages/lookbook.html">Lookbook</a><a href="src/pages/login.html">Your account</a><a href="src/pages/cart.html">Shopping bag</a></div></div>
         <div class="footer-column"><h3>Need help?</h3><div class="footer-links"><a href="#">Delivery & returns</a><a href="#">Size guide</a><a href="#">Contact</a></div></div>
     </div><div class="footer-bottom container"><span>© 2026 FashionFunks</span><span>Demo storefront · No real payments collected</span></div></footer>
 </body>

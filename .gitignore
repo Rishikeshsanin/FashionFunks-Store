@@ -1,0 +1,23 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+
+# Runtime data and secrets
+.env
+.env.*
+!.env.example
+uploads/
+*.log
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local tooling
+.cache/
+.tmp/
+work/
