@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { InfoPage, InfoSection } from "@/components/info-page";
+
+export const metadata: Metadata = { title: "Terms" };
+export default function Page() { return <InfoPage eyebrow="Demo terms" title="Terms of use." intro="These terms are intentionally short because FashionFunks is currently a non-commercial portfolio experience."><InfoSection title="Portfolio use"><p>The storefront, products, prices, ratings, reviews and availability are illustrative. Placing a demo order does not create a purchase contract, charge money or reserve merchandise.</p></InfoSection><InfoSection title="Content"><p>Brand elements, interface design and seed catalog copy are part of this project. Product photography is stored with the project for demonstration and should be reviewed for licensing before any commercial launch.</p></InfoSection><InfoSection title="Availability"><p>The project may change, reset browser data or be unavailable while development continues. Features are provided for demonstration without commercial warranties.</p></InfoSection></InfoPage>; }

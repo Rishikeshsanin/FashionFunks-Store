@@ -1,54 +1,53 @@
 # Project structure
 
-The repository uses a static, feature-oriented layout that keeps the deployable entry point at the root while separating pages, application code, and public assets.
+FashionFunks uses the Next.js App Router and separates routes, reusable interface components, domain logic, seed data, public media, tests, and database migrations.
 
 ```text
 .
-|-- index.html                         # Static entry point
+|-- app/                         # Routes, metadata, route states, global styles
+|   |-- product/[slug]/          # Static-generated product detail routes
+|   |-- shop/                    # URL-driven catalog
+|   `-- ...                      # Cart, checkout, account, editorial and policy pages
+|-- components/                  # Reusable storefront and interaction components
+|-- data/
+|   `-- products.ts              # Typed local seed catalog
+|-- lib/                         # Catalog, pricing, money and Supabase adapters
 |-- public/
-|   `-- assets/
-|       `-- images/
-|           |-- editorial/             # Campaign and hero imagery
-|           `-- products/              # Catalog and lookbook imagery
-|-- src/
-|   |-- pages/                         # Secondary HTML documents
-|   |-- scripts/
-|   |   `-- storefront.js              # Product data and UI behavior
-|   `-- styles/
-|       `-- main.css                   # Shared responsive styles
-|-- docs/                              # Architecture documentation
-|-- .gitignore
-`-- README.md
+|   `-- assets/images/
+|       |-- editorial/           # Campaign imagery
+|       `-- products/            # Product imagery
+|-- supabase/
+|   |-- migrations/              # PostgreSQL schema and RLS policies
+|   `-- README.md                # Persistence boundary and setup notes
+|-- tests/
+|   |-- e2e/                     # Desktop and mobile customer journeys
+|   `-- *.test.ts                # Unit tests
+|-- types/                       # Shared domain types
+|-- .env.example
+|-- next.config.ts
+|-- playwright.config.ts
+|-- vitest.config.ts
+`-- package.json
 ```
+
+## Boundaries
+
+- Route files compose screens; reusable UI and client state belong in `components/`.
+- Business rules such as pricing and catalog filtering belong in `lib/` and remain framework-independent where possible.
+- Static catalog content belongs in `data/`; it can later be replaced by a repository that reads Supabase without rewriting the UI.
+- Browser-addressable media belongs in `public/assets/`, grouped by purpose.
+- Database changes are additive, reviewed SQL migrations under `supabase/migrations/`.
+- Unit tests cover deterministic domain logic; Playwright covers browser journeys and responsive behavior.
 
 ## Conventions
 
-- Use lowercase kebab-case for file and directory names.
-- Give assets descriptive names based on their content and role.
-- Keep `index.html` at the repository root for static-host compatibility.
-- Put additional browser pages in `src/pages/`.
-- Keep shared client behavior in `src/scripts/` and shared styling in `src/styles/`.
-- Put browser-addressable static files under `public/assets/`, grouped by media type and purpose.
-- Secondary pages declare `<base href="../../">`, so links remain project-root-relative and continue to work when the repository is hosted below a domain subpath.
-- Avoid committing generated output, local tooling state, secrets, or runtime uploads.
+- Use lowercase kebab-case for routes and files, PascalCase for React component names, and camelCase for functions and variables.
+- Keep customer-facing prices as integer rupees. Never use floating-point values for stored money.
+- Keep filter state in the URL so filtered views remain shareable and browser navigation works.
+- Keep client storage versioned so future migrations can be explicit.
+- Never commit `.env.local`, generated Next.js output, coverage, browser reports, or TypeScript build information.
+- Prefer server components by default and opt into client components only for interactions or browser APIs.
 
-## Future application layers
+## Future development
 
-The current storefront is intentionally static, so it has no backend or database files to relocate. If server-side features are introduced, add them only when implementation exists:
-
-```text
-server/
-|-- config/
-|-- controllers/
-|-- middleware/
-|-- routes/
-|-- services/
-`-- utils/
-
-database/
-|-- migrations/
-|-- models/
-`-- seeds/
-```
-
-Keep credentials in environment variables, document required keys in `.env.example`, and never commit secrets or production data.
+The Supabase schema intentionally stays small: profiles, catalog records, wishlists, demo orders, order lines, and newsletter subscribers. Payment, address, phone, tax, and shipping-provider tables are intentionally absent from the current portfolio scope.
