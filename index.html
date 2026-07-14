@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="FashionFunks — modern clothing for women, men and everyone in between.">
+    <title>FashionFunks — Wear what moves you</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="announcement">Free delivery above ₹2,999 · Easy 15-day returns</div>
+    <header class="site-header">
+        <div class="header-inner container">
+            <a class="brand" href="index.html" aria-label="FashionFunks home">
+                <span class="brand-mark">FF</span><span>FASHIONFUNKS</span>
+            </a>
+            <nav class="primary-nav" aria-label="Primary navigation">
+                <a href="shop.html" aria-current="page">New in</a>
+                <a href="shop.html?category=Women">Women</a>
+                <a href="shop.html?category=Men">Men</a>
+                <a href="shop.html?category=Unisex">Unisex</a>
+                <a href="web.html">Lookbook</a>
+            </nav>
+            <div class="header-actions">
+                <a class="icon-link" href="shop.html#search" aria-label="Search products">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+                </a>
+                <a class="icon-link account-link" href="login.html" aria-label="Account">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"></path></svg>
+                    <span class="account-name" data-account-label>Account</span>
+                </a>
+                <a class="icon-link" href="cart.html" aria-label="Shopping bag">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg>
+                    <span class="cart-count" data-cart-count hidden>0</span>
+                </a>
+                <button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-inner container">
+                <div class="hero-copy">
+                    <p class="eyebrow">The new everyday, edited</p>
+                    <h1>Wear what moves you.</h1>
+                    <p class="hero-description">Clean silhouettes, expressive colour and made-to-repeat essentials for women, men and everyone in between.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="shop.html">Shop new arrivals</a>
+                        <a class="button button-secondary" href="web.html">Explore the lookbook</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-strip" aria-label="Store benefits">
+            <div class="service-grid container">
+                <div class="service-item"><span class="service-icon">↗</span><div><strong>Fresh weekly edits</strong><span>New pieces, thoughtfully chosen</span></div></div>
+                <div class="service-item"><span class="service-icon">◌</span><div><strong>Easy 15-day returns</strong><span>Change your mind, stress-free</span></div></div>
+                <div class="service-item"><span class="service-icon">✦</span><div><strong>Style without rules</strong><span>Collections made for self-expression</span></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">Just landed</p><h2>New in rotation</h2></div>
+                    <a class="text-link" href="shop.html">Shop all pieces <span>↗</span></a>
+                </div>
+                <div class="product-grid" data-product-grid="featured"></div>
+            </div>
+        </section>
+
+        <section class="section section-soft">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">Find your lane</p><h2>Shop by mood</h2></div>
+                    <p>Three edits, one wardrobe. Go polished, relaxed or somewhere beautifully in between.</p>
+                </div>
+                <div class="category-grid">
+                    <a class="category-card" href="shop.html?category=Women">
+                        <img src="wn4.webp" alt="Women's contemporary fashion" loading="lazy">
+                        <span class="category-content"><span><h3>For her</h3><span>Soft forms, strong colour</span></span><span class="round-arrow">↗</span></span>
+                    </a>
+                    <a class="category-card" href="shop.html?category=Men">
+                        <img src="srt1.webp" alt="Men's modern essentials" loading="lazy">
+                        <span class="category-content"><span><h3>For him</h3><span>Clean layers, effortless fits</span></span><span class="round-arrow">↗</span></span>
+                    </a>
+                    <a class="category-card" href="shop.html?category=Unisex">
+                        <img src="tr3.webp" alt="Unisex streetwear" loading="lazy">
+                        <span class="category-content"><span><h3>For everyone</h3><span>No labels, just great clothes</span></span><span class="round-arrow">↗</span></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container editorial">
+                <div class="editorial-visual" role="img" aria-label="Model in statement outerwear"></div>
+                <div class="editorial-copy">
+                    <p class="eyebrow">The colour issue</p>
+                    <h2>Minimal doesn’t mean invisible.</h2>
+                    <p>Start with an easy foundation. Add one unapologetic colour. Keep everything else beautifully quiet.</p>
+                    <div class="button-row"><a class="button button-light" href="shop.html?category=Women">Shop statement pieces</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">Most wanted</p><h2>Community favourites</h2></div>
+                    <p>The pieces everyone keeps coming back for — easy shapes, confident details, zero overthinking.</p>
+                </div>
+                <div class="product-grid" data-product-grid="best"></div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <div class="newsletter-inner container">
+                <div><h2>Good clothes. Better inbox.</h2><p>New drops, styling notes and first access — no noise.</p></div>
+                <div>
+                    <form class="newsletter-form" data-newsletter-form>
+                        <input type="email" aria-label="Email address" placeholder="Email address" required>
+                        <button class="button button-light" type="submit">Join the list</button>
+                    </form>
+                    <p class="newsletter-note" aria-live="polite"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-grid container">
+            <div class="footer-about">
+                <a class="brand footer-brand" href="index.html"><span class="brand-mark">FF</span><span>FASHIONFUNKS</span></a>
+                <p class="footer-intro">Modern clothing for every version of you. Designed as a vibrant demo shopping experience.</p>
+            </div>
+            <div class="footer-column"><h3>Shop</h3><div class="footer-links"><a href="shop.html">New in</a><a href="shop.html?category=Women">Women</a><a href="shop.html?category=Men">Men</a><a href="shop.html?category=Unisex">Unisex</a></div></div>
+            <div class="footer-column"><h3>Discover</h3><div class="footer-links"><a href="web.html">Lookbook</a><a href="shop.html">The edit</a><a href="login.html">Your account</a><a href="cart.html">Shopping bag</a></div></div>
+            <div class="footer-column"><h3>Need help?</h3><div class="footer-links"><a href="#">Delivery & returns</a><a href="#">Size guide</a><a href="#">Contact</a><a href="#">FAQ</a></div></div>
+        </div>
+        <div class="footer-bottom container"><span>© 2026 FashionFunks</span><span>Demo storefront · No real payments collected</span></div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Complete your FashionFunks demo order without entering payment or address details.">
+    <title>Checkout · FashionFunks</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="announcement">Demo checkout · No payment or personal details required</div>
+    <header class="site-header"><div class="header-inner container">
+        <a class="brand" href="index.html"><span class="brand-mark">FF</span><span>FASHIONFUNKS</span></a>
+        <nav class="primary-nav" aria-label="Primary navigation"><a href="shop.html">Continue shopping</a><a href="cart.html">Back to bag</a></nav>
+        <div class="header-actions"><a class="icon-link" href="cart.html" aria-label="Shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg><span class="cart-count" data-cart-count hidden>0</span></a><button class="menu-button" type="button" aria-label="Toggle navigation" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div>
+    </div></header>
+    <main>
+        <section class="page-hero"><div class="page-hero-inner container"><div><p class="eyebrow">One last look</p><h1>Simple checkout</h1></div><p>No forms, no address and no card details. Review the edit and place a polished demo order in one click.</p></div></section>
+        <section class="section"><div class="checkout-layout container">
+            <div>
+                <div class="checkout-intro"><h2>Your privacy stays yours.</h2><p>This is a namesake storefront checkout. We intentionally don’t request delivery, payment or other personal information.</p></div>
+                <div class="checkout-items" data-checkout-items></div>
+                <div class="button-row"><button class="button button-cobalt button-block" type="button" data-place-order>Place demo order</button></div>
+            </div>
+            <div data-checkout-summary></div>
+        </div></section>
+    </main>
+    <footer class="site-footer"><div class="footer-bottom container" style="border-top:0"><span>© 2026 FashionFunks</span><span>Secure demo checkout · No real payments collected</span></div></footer>
+</body>
+</html>
