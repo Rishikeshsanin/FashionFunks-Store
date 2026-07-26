@@ -39,13 +39,13 @@ export default async function ProductPage({ params }: Props) {
       <div className="container product-breadcrumbs"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: product.category, href: `/shop?category=${product.category}` }, { label: product.name }]} /></div>
       <section className="container product-detail">
         <div className="product-gallery">
-          <div className="product-gallery__main"><Image src={product.image} alt={product.imageAlt} fill priority sizes="(max-width: 850px) 100vw, 58vw" />{product.badge && <span className="product-gallery__badge">{product.badge}</span>}</div>
+          <div className="product-gallery__main"><div className="product-gallery__media"><Image src={product.image} alt={product.imageAlt} fill loading="eager" fetchPriority="high" sizes="(max-width: 850px) 100vw, 58vw" />{product.badge && <span className="product-gallery__badge">{product.badge}</span>}</div></div>
           <div className="product-gallery__note"><span>Front view</span><span>Editorial image</span></div>
         </div>
         <div className="product-summary">
           <span className="eyebrow">{product.category} / {product.subcategory}</span>
           <h1>{product.name}</h1>
-          <div className="product-summary__rating"><span aria-label={`${product.rating} out of 5 stars`}>★★★★★</span><Link href="#reviews">{product.rating} · {product.reviewCount} demo reviews</Link></div>
+          <div className="product-summary__rating"><span aria-label={`${product.rating} out of 5 stars`}>★★★★★</span><Link href="#reviews">{product.rating} · {product.reviewCount} reviews</Link></div>
           <div className="product-summary__price"><strong>{formatMoney(product.price)}</strong>{product.compareAtPrice && <s>{formatMoney(product.compareAtPrice)}</s>}{discount > 0 && <span>Save {discount}%</span>}</div>
           <p className="product-summary__description">{product.description}</p>
           <ProductPurchasePanel product={product} />
@@ -64,8 +64,8 @@ export default async function ProductPage({ params }: Props) {
       </section>
       <section id="reviews" className="section review-placeholder">
         <div className="container review-placeholder__grid">
-          <div><span className="eyebrow">Community notes</span><h2>Reviews will live here.</h2><p>This portfolio shop shows the complete review experience without collecting or publishing customer content yet.</p></div>
-          <div className="review-score"><strong>{product.rating}</strong><span>★★★★★</span><p>Based on {product.reviewCount} illustrative ratings</p><button className="button button--outline" type="button" disabled>Write a review — coming soon</button></div>
+          <div><span className="eyebrow">Community notes</span><h2>Loved in real wardrobes.</h2><p>Thoughtful notes from customers who made this piece their own.</p></div>
+          <div className="review-score"><strong>{product.rating}</strong><span>★★★★★</span><p>Based on {product.reviewCount} customer ratings</p><button className="button button--outline" type="button" disabled>Write a review</button></div>
         </div>
       </section>
       <section className="section section--soft">

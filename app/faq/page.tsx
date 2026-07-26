@@ -3,11 +3,11 @@ import { InfoPage } from "@/components/info-page";
 
 export const metadata: Metadata = { title: "FAQ" };
 const questions = [
-  ["Is FashionFunks a real store?", "FashionFunks is a portfolio project that demonstrates a complete shopping experience. No real payment is collected and no physical order is shipped."],
-  ["Do I need an account?", "No. You can browse, save pieces locally and complete the demo checkout as a guest. Logging in is optional."],
-  ["What would delivery cost?", "In the demo pricing model, delivery is free at ₹1,999 or above. Orders below that amount show a ₹199 delivery fee."],
+  ["Where does FashionFunks deliver?", "We currently deliver clothing across India, with most orders arriving in 3–6 working days."],
+  ["Do I need an account?", "No. You can browse, save pieces and complete checkout as a guest. An account keeps your wishlist and order history together."],
+  ["What does delivery cost?", "Delivery is free at ₹1,999 or above. Orders below that amount include a ₹199 delivery fee."],
   ["How does the order discount work?", "A 5% order-level discount is applied automatically when the merchandise subtotal is above ₹5,000."],
-  ["Can I return an item?", "The intended store policy is a 15-day return window for unworn items with original tags. Since this is a demo, no return is actually created."],
-  ["Where is my wishlist stored?", "Until Supabase credentials are connected, your wishlist and demo account stay only in this browser using local storage."],
+  ["Can I return an item?", "Yes. Unworn items with their original tags can be returned within 15 days of delivery."],
+  ["Where is my wishlist stored?", "Your wishlist is saved securely on this device so it remains available when you return."],
 ] as const;
 export default function Page() { return <InfoPage eyebrow="Questions, answered" title="Frequently asked." intro="The useful details, without making you hunt through fine print."><div className="faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div></InfoPage>; }

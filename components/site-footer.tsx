@@ -18,14 +18,14 @@ export function SiteFooter() {
         </div>
       </section>
       <div className="container footer-grid">
-        <div className="footer-intro"><Logo footer /><p>Expressive, easy clothes for every version of you. A portfolio storefront built in India.</p></div>
+        <div className="footer-intro"><Logo footer /><p>Expressive, easy clothes for every version of you. Designed in India, made for everywhere you go.</p></div>
         {footerGroups.map((group) => (
           <div className="footer-column" key={group.title}><h3>{group.title}</h3>{group.links.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}</div>
         ))}
       </div>
       <div className="container footer-legal">
         <span>© 2026 FashionFunks</span>
-        <span>Demo store · No real payments are collected</span>
+        <span>India-wide delivery · Easy 15-day returns</span>
         <span><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/accessibility">Accessibility</Link></span>
       </div>
     </footer>

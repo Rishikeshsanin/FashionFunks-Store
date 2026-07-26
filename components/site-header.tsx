@@ -15,6 +15,7 @@ const links = [
   { href: "/shop?category=Unisex", label: "Unisex" },
   { href: "/shop?category=Kids", label: "Kids" },
   { href: "/lookbook", label: "Lookbook" },
+  { href: "/premium", label: "Premium", premium: true },
 ];
 
 export function SiteHeader() {
@@ -42,10 +43,10 @@ export function SiteHeader() {
           <nav className="primary-nav" aria-label="Primary navigation">
             {links.map((link) => {
               const activeCategory = searchParams.get("category");
-              const active = link.href === "/lookbook"
-                ? pathname === "/lookbook"
+              const active = link.href === "/lookbook" || link.href === "/premium"
+                ? pathname === link.href
                 : pathname === "/shop" && (link.label === "New in" ? !activeCategory : activeCategory === link.label);
-              return <Link key={link.label} href={link.href} aria-current={active ? "page" : undefined}>{link.label}</Link>;
+              return <Link className={link.premium ? "nav-premium" : undefined} key={link.label} href={link.href} aria-current={active ? "page" : undefined}>{link.premium && <i aria-hidden="true">✦</i>}<span>{link.label}</span></Link>;
             })}
           </nav>
           <div className="header-actions">
@@ -53,8 +54,8 @@ export function SiteHeader() {
             <button className="header-action theme-toggle" type="button" aria-label={`Use ${theme === "light" ? "dark" : "light"} theme`} onClick={toggleTheme}>
               {theme === "light" ? <MoonIcon /> : <SunIcon />}
             </button>
-            <Link className="header-action header-account" href="/login" aria-label={user ? `Account for ${user.name}` : "Log in"}>
-              <UserIcon /><span>{user?.name.split(" ")[0] ?? "Log in"}</span>
+            <Link className="header-action header-account" href="/login" aria-label={user ? `Account for ${user.name}` : "Profile"}>
+              <UserIcon /><span>{user?.name.split(" ")[0] ?? "Profile"}</span>
             </Link>
             <Link className="header-action header-badge" href="/wishlist" aria-label={`Wishlist with ${wishlist.length} items`}><HeartIcon /><span>{wishlist.length}</span></Link>
             <Link className="header-action header-badge" href="/cart" aria-label={`Shopping bag with ${cartCount} items`}><BagIcon /><span>{cartCount}</span></Link>
@@ -62,7 +63,7 @@ export function SiteHeader() {
         </div>
         <div id="mobile-navigation" className={`mobile-nav${menuOpen ? " mobile-nav--open" : ""}`}>
           <nav aria-label="Mobile navigation">
-            {links.map((link) => <Link key={link.label} href={link.href}>{link.label}<span>↗</span></Link>)}
+            {links.map((link) => <Link className={link.premium ? "mobile-nav__premium" : undefined} key={link.label} href={link.href}><span>{link.premium && <i aria-hidden="true">✦</i>}{link.label}</span><span>↗</span></Link>)}
             <Link href="/shop?category=Babies">Babies<span>↗</span></Link>
           </nav>
           <div className="mobile-nav__utilities">
