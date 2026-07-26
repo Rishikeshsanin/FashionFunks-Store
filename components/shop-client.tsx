@@ -4,6 +4,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronIcon, CloseIcon, SearchIcon } from "@/components/icons";
 import { ProductGrid } from "@/components/product-grid";
+import { SortMenu } from "@/components/sort-menu";
+import { categoryCatalogCopy, defaultCatalogCopy } from "@/data/site-copy";
 import { filterProducts, getCatalogFacets, type CatalogFilters } from "@/lib/catalog";
 import { categories, type Category, type SortOption } from "@/types/catalog";
 import { products as allProducts } from "@/data/products";
@@ -52,6 +54,7 @@ export function ShopClient() {
   const visible = matches.slice(0, visibleCount);
   const activeCount = [...searchParams.keys()].filter((key) => key !== "sort").length;
   const categoryTitle = filters.category ?? (filters.query ? `Results for “${filters.query}”` : "New in");
+  const heroCopy = filters.category ? categoryCatalogCopy[filters.category] : defaultCatalogCopy;
   const subcategories = [...new Set(allProducts.filter((product) => !filters.category || product.category === filters.category).map((product) => product.subcategory))].sort();
 
   function updateParam(name: string, value?: string) {
@@ -99,8 +102,8 @@ export function ShopClient() {
     <>
       <header className="shop-hero">
         <div className="container">
-          <span className="eyebrow">The complete edit</span>
-          <div><h1>{categoryTitle}</h1><p>Considered clothing, expressive colour and easy shapes for real wardrobes.</p></div>
+          <span className="eyebrow">{filters.query ? "Your search, thoughtfully filtered" : heroCopy.eyebrow}</span>
+          <div><h1>{categoryTitle}</h1><p>{filters.query ? "Explore the closest matches across pieces, colours, categories and collections." : heroCopy.description}</p></div>
           <nav className="category-pills" aria-label="Shop categories">
             <button className={!filters.category ? "active" : ""} onClick={() => updateParam("category")} type="button">All</button>
             {categories.map((category) => <button className={filters.category === category ? "active" : ""} onClick={() => updateParam("category", category)} type="button" key={category}>{category}</button>)}
@@ -111,7 +114,7 @@ export function ShopClient() {
         <div aria-live="polite"><strong>{matches.length}</strong> pieces</div>
         <div>
           <button className="filter-trigger" type="button" onClick={() => setFiltersOpen(true)}>Filters{activeCount > 0 && <span>{activeCount}</span>}</button>
-          <label className="sort-field"><span>Sort by</span><select value={filters.sort} onChange={(event) => updateParam("sort", event.target.value)}><option value="newest">Newest first</option><option value="rating">Top rated</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select><ChevronIcon /></label>
+          <SortMenu value={filters.sort ?? "newest"} onChange={(value) => updateParam("sort", value)} />
         </div>
       </div>
       <div className="container shop-layout">

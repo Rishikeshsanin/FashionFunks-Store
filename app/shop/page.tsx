@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { BrandedLoading } from "@/components/branded-loading";
 import { ShopClient } from "@/components/shop-client";
 
 export const metadata: Metadata = {
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function ShopPage() {
-  return <Suspense fallback={<div className="container page-loading"><div className="skeleton skeleton--title" /></div>}><ShopClient /></Suspense>;
+  return <Suspense fallback={<BrandedLoading catalog />}><ShopClient /></Suspense>;
 }

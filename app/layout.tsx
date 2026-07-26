@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { StoreProvider } from "@/components/providers";
+import { PremiumInvite } from "@/components/premium-invite";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -22,12 +24,14 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <StoreProvider>
           <Suspense fallback={<div className="header-loading" aria-hidden="true" />}><SiteHeader /></Suspense>
           <main id="main-content">{children}</main>
           <SiteFooter />
+          <Suspense><PremiumInvite /></Suspense>
+          <ScrollToTop />
         </StoreProvider>
       </body>
     </html>

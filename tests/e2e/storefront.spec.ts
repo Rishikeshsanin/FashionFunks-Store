@@ -20,9 +20,9 @@ test("guest can complete the payment-free checkout", async ({ page }) => {
   await page.getByLabel("Name").fill("Rishi");
   await page.getByPlaceholder("you@example.com").fill("rishi@example.com");
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: /Place demo order/ }).click();
+  await page.getByRole("button", { name: /Place order/ }).click();
   await expect(page.getByRole("heading", { name: /officially/ })).toBeVisible();
-  await expect(page.getByText(/no money was charged/i)).toBeVisible();
+  await expect(page.getByText(/your order is confirmed/i)).toBeVisible();
 });
 
 test("mobile navigation exposes every shopping and account route", async ({ page }, testInfo) => {

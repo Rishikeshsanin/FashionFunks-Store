@@ -42,7 +42,7 @@ export function CartPage() {
           <dl className="summary-lines"><div><dt>Subtotal</dt><dd>{formatMoney(totals.subtotal)}</dd></div>{totals.discount > 0 && <div className="discount-line"><dt>Order discount (5%)</dt><dd>−{formatMoney(totals.discount)}</dd></div>}<div><dt>Delivery</dt><dd>{totals.delivery ? formatMoney(totals.delivery) : "Free"}</dd></div><div className="summary-total"><dt>Total</dt><dd>{formatMoney(totals.total)}</dd></div></dl>
           {subtotal <= ORDER_DISCOUNT_THRESHOLD && <p className="summary-offer">Spend over {formatMoney(ORDER_DISCOUNT_THRESHOLD)} to unlock 5% off your order.</p>}
           <Link className="button button--primary button--wide" href="/checkout">Continue to checkout</Link>
-          <p className="secure-note">Demo checkout · No card or address needed</p>
+          <p className="secure-note">Secure checkout · No card or address needed</p>
         </aside>
       </div>
     </div>
