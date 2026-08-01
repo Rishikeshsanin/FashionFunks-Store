@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BagIcon, CloseIcon, HeartIcon, MenuIcon, MoonIcon, SearchIcon, SunIcon, UserIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { SearchDrawer } from "@/components/search-drawer";
@@ -24,8 +24,19 @@ export function SiteHeader() {
   const { cartCount, wishlist, user, logout, theme, toggleTheme } = useStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
   const closeSearch = useCallback(() => setSearchOpen(false), []);
 
   return (
@@ -36,7 +47,7 @@ export function SiteHeader() {
       </div>
       <header className="site-header">
         <div className="header-row container-wide">
-          <button className="header-menu" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen((value) => !value)}>
+          <button ref={menuButtonRef} className="header-menu" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <CloseIcon /> : <MenuIcon />}<span>Menu</span>
           </button>
           <Logo />
@@ -61,7 +72,7 @@ export function SiteHeader() {
             <Link className="header-action header-badge" href="/cart" aria-label={`Shopping bag with ${cartCount} items`}><BagIcon /><span>{cartCount}</span></Link>
           </div>
         </div>
-        <div id="mobile-navigation" className={`mobile-nav${menuOpen ? " mobile-nav--open" : ""}`}>
+        <div id="mobile-navigation" className={`mobile-nav${menuOpen ? " mobile-nav--open" : ""}`} aria-hidden={!menuOpen} inert={!menuOpen}>
           <nav aria-label="Mobile navigation">
             {links.map((link) => <Link className={link.premium ? "mobile-nav__premium" : undefined} key={link.label} href={link.href}><span>{link.premium && <i aria-hidden="true">✦</i>}{link.label}</span><span>↗</span></Link>)}
             <Link href="/shop?category=Babies">Babies<span>↗</span></Link>
