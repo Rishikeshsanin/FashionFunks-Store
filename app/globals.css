@@ -300,6 +300,9 @@ button, a, input, select, textarea, summary { outline-color: transparent; }
 .shop-hero .container > div { display: grid; grid-template-columns: 1fr minmax(260px, 440px); align-items: end; gap: 50px; margin-top: 18px; }
 .shop-hero h1 { margin: 0; font-size: clamp(4rem, 8vw, 8rem); text-transform: capitalize; }
 .shop-hero p { margin: 0 0 12px; color: var(--muted); }
+.supporting-description-carousel { display: grid; min-block-size: 4.6em; align-items: end; }
+.supporting-description-carousel p { grid-area: 1 / 1; opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .42s ease, transform .42s ease; }
+.supporting-description-carousel p.is-active { opacity: 1; transform: translateY(0); }
 .category-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 45px; }
 .category-pills button { min-height: 39px; padding: 8px 18px; border: 1px solid var(--line); border-radius: 99px; background: transparent; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .category-pills button:hover, .category-pills button.active { border-color: var(--ink); background: var(--ink); color: var(--paper); }
@@ -698,8 +701,8 @@ button, a, input, select, textarea, summary { outline-color: transparent; }
   .header-menu { display: inline-flex; justify-self: start; padding-left: 0; }
   .primary-nav { display: none; }
   .header-actions .header-account, .header-actions .theme-toggle, .header-actions .header-badge:first-of-type { display: none; }
-  .mobile-nav { position: fixed; z-index: 95; top: 102px; left: 0; right: 0; max-height: calc(100svh - 102px); display: block; padding: 30px var(--container-side, 17px); background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); opacity: 0; transform: translateY(-15px); pointer-events: none; overflow-y: auto; transition: opacity .2s, transform .2s; }
-  .mobile-nav--open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .mobile-nav { position: fixed; z-index: 95; top: 102px; left: 0; right: 0; max-height: calc(100svh - 102px); display: block; padding: 30px var(--container-side, 17px); background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); visibility: hidden; opacity: 0; transform: translateY(-15px); pointer-events: none; overflow-y: auto; transition: visibility 0s linear .2s, opacity .2s, transform .2s; }
+  .mobile-nav--open { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; transition-delay: 0s; }
   .mobile-nav nav { display: grid; }
   .mobile-nav nav a { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 1.7rem; }
   .mobile-nav nav .mobile-nav__premium { margin-top: 9px; padding-inline: 14px; border: 1px solid rgba(232,207,136,.48); background: linear-gradient(135deg, #10172d, #183b9e 72%, #2854d6); color: #fff7df; }
@@ -900,4 +903,5 @@ button, a, input, select, textarea, summary { outline-color: transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .supporting-description-carousel p { transform: none; }
 }

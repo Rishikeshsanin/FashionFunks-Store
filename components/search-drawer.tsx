@@ -6,6 +6,7 @@ import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type Keybo
 import { ArrowIcon, CloseIcon, SearchIcon } from "@/components/icons";
 import { filterProducts } from "@/lib/catalog";
 import { categories } from "@/types/catalog";
+import { useDialogFocus } from "@/components/use-dialog-focus";
 
 const TRENDING = ["Cobalt", "Overshirt", "Unisex tee", "Occasion dress"];
 const RECENT_KEY = "fashionfunks-recent-searches-v1";
@@ -23,14 +24,15 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
   const [recent, setRecent] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
   const router = useRouter();
   const titleId = useId();
   const listId = useId();
+  useDialogFocus(open, dialogRef, onClose, inputRef);
 
   useEffect(() => {
     if (open) {
       setRecent(readRecentSearches());
-      window.setTimeout(() => inputRef.current?.focus(), 50);
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
@@ -39,14 +41,6 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
     }
     return () => document.body.classList.remove("no-scroll");
   }, [open]);
-
-  useEffect(() => {
-    function onKeyDown(event: globalThis.KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
 
   const cleanQuery = query.trim();
   const categoryMatches = useMemo(() => {
@@ -98,7 +92,7 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
 
   return (
     <div className="drawer-shell" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
-      <section className="search-drawer" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <section ref={dialogRef} className="search-drawer" role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}>
         <div className="search-drawer__head">
           <div>
             <span className="eyebrow">Search the complete edit</span>

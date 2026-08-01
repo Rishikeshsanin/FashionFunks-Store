@@ -1,10 +1,12 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronIcon, CloseIcon, SearchIcon } from "@/components/icons";
 import { ProductGrid } from "@/components/product-grid";
 import { SortMenu } from "@/components/sort-menu";
+import { SupportingDescriptionCarousel } from "@/components/supporting-description-carousel";
+import { useDialogFocus } from "@/components/use-dialog-focus";
 import { categoryCatalogCopy, defaultCatalogCopy } from "@/data/site-copy";
 import { filterProducts, getCatalogFacets, type CatalogFilters } from "@/lib/catalog";
 import { categories, type Category, type SortOption } from "@/types/catalog";
@@ -24,6 +26,8 @@ export function ShopClient() {
   const router = useRouter();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const filterDialogRef = useRef<HTMLDivElement>(null);
+  const filterCloseRef = useRef<HTMLButtonElement>(null);
   const facets = useMemo(() => getCatalogFacets(), []);
   const paramsKey = searchParams.toString();
 
@@ -49,6 +53,8 @@ export function ShopClient() {
     document.body.classList.toggle("no-scroll", filtersOpen);
     return () => document.body.classList.remove("no-scroll");
   }, [filtersOpen]);
+  const closeFilters = useCallback(() => setFiltersOpen(false), []);
+  useDialogFocus(filtersOpen, filterDialogRef, closeFilters, filterCloseRef);
 
   const matches = useMemo(() => filterProducts(filters), [filters]);
   const visible = matches.slice(0, visibleCount);
@@ -71,7 +77,7 @@ export function ShopClient() {
 
   const filterPanel = (
     <div className="filter-panel">
-      <div className="filter-panel__mobile-head"><strong>Filter the edit</strong><button type="button" aria-label="Close filters" onClick={() => setFiltersOpen(false)}><CloseIcon /></button></div>
+      <div className="filter-panel__mobile-head"><strong>Filter the edit</strong><button ref={filterCloseRef} type="button" aria-label="Close filters" onClick={closeFilters}><CloseIcon /></button></div>
       <FilterGroup title="Category">
         <label className="check-row"><input type="radio" name="category" checked={!filters.category} onChange={() => updateParam("category")} /><span>All clothing</span><small>{allProducts.length}</small></label>
         {categories.map((category) => <label className="check-row" key={category}><input type="radio" name="category" checked={filters.category === category} onChange={() => updateParam("category", category)} /><span>{category}</span><small>{allProducts.filter((product) => product.category === category).length}</small></label>)}
@@ -94,7 +100,7 @@ export function ShopClient() {
         <label className="check-row"><input type="checkbox" checked={filters.minDiscount === 10} onChange={(event) => updateParam("discount", event.target.checked ? "10" : undefined)} /><span>10% off or more</span></label>
       </FilterGroup>
       {activeCount > 0 && <button className="text-button" type="button" onClick={clearFilters}>Clear all filters</button>}
-      <button className="button button--primary filter-apply" type="button" onClick={() => setFiltersOpen(false)}>Show {matches.length} pieces</button>
+      <button className="button button--primary filter-apply" type="button" onClick={closeFilters}>Show {matches.length} pieces</button>
     </div>
   );
 
@@ -103,7 +109,12 @@ export function ShopClient() {
       <header className="shop-hero">
         <div className="container">
           <span className="eyebrow">{filters.query ? "Your search, thoughtfully filtered" : heroCopy.eyebrow}</span>
-          <div><h1>{categoryTitle}</h1><p>{filters.query ? "Explore the closest matches across pieces, colours, categories and collections." : heroCopy.description}</p></div>
+          <div>
+            <h1>{categoryTitle}</h1>
+            {filters.query
+              ? <p>Explore the closest matches across pieces, colours, categories and collections.</p>
+              : <SupportingDescriptionCarousel descriptions={heroCopy.descriptions} />}
+          </div>
           <nav className="category-pills" aria-label="Shop categories">
             <button className={!filters.category ? "active" : ""} onClick={() => updateParam("category")} type="button">All</button>
             {categories.map((category) => <button className={filters.category === category ? "active" : ""} onClick={() => updateParam("category", category)} type="button" key={category}>{category}</button>)}
@@ -130,7 +141,7 @@ export function ShopClient() {
           )}
         </section>
       </div>
-      {filtersOpen && <div className="filter-drawer" role="dialog" aria-modal="true" aria-label="Product filters" onMouseDown={(event) => event.target === event.currentTarget && setFiltersOpen(false)}>{filterPanel}</div>}
+      {filtersOpen && <div ref={filterDialogRef} className="filter-drawer" role="dialog" aria-modal="true" aria-label="Product filters" tabIndex={-1} onMouseDown={(event) => event.target === event.currentTarget && closeFilters()}>{filterPanel}</div>}
     </>
   );
 }
