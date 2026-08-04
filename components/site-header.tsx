@@ -14,6 +14,7 @@ const links = [
   { href: "/shop?category=Men", label: "Men" },
   { href: "/shop?category=Unisex", label: "Unisex" },
   { href: "/shop?category=Kids", label: "Kids" },
+  { href: "/shop?category=Fandom%20Edit", label: "Fandom Edit" },
   { href: "/lookbook", label: "Lookbook" },
   { href: "/premium", label: "Premium", premium: true },
 ];
@@ -75,7 +76,6 @@ export function SiteHeader() {
         <div id="mobile-navigation" className={`mobile-nav${menuOpen ? " mobile-nav--open" : ""}`} aria-hidden={!menuOpen} inert={!menuOpen}>
           <nav aria-label="Mobile navigation">
             {links.map((link) => <Link className={link.premium ? "mobile-nav__premium" : undefined} key={link.label} href={link.href}><span>{link.premium && <i aria-hidden="true">✦</i>}{link.label}</span><span>↗</span></Link>)}
-            <Link href="/shop?category=Babies">Babies<span>↗</span></Link>
           </nav>
           <div className="mobile-nav__utilities">
             <Link href="/login"><UserIcon />{user ? `Hi, ${user.name}` : "Log in or create an account"}</Link>

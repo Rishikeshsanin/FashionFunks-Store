@@ -28,6 +28,10 @@ export function getDiscountPercentage(product: Product) {
   return Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100);
 }
 
+export function productBelongsToCategory(product: Product, category: Category) {
+  return product.category === category || product.additionalCategories?.includes(category) === true;
+}
+
 function normalise(value: string) {
   return value.toLocaleLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
@@ -64,7 +68,7 @@ function levenshtein(a: string, b: string) {
 export function filterProducts(filters: CatalogFilters) {
   const filtered = products.filter((product) => {
     if (filters.query && !includesQuery(product, filters.query)) return false;
-    if (filters.category && product.category !== filters.category) return false;
+    if (filters.category && !productBelongsToCategory(product, filters.category)) return false;
     if (filters.subcategory && product.subcategory !== filters.subcategory) return false;
     if (filters.size && !product.sizes.includes(filters.size)) return false;
     if (filters.color && !product.colors.includes(filters.color)) return false;

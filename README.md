@@ -4,7 +4,8 @@ FashionFunks is a production-shaped fashion storefront built as a portfolio proj
 
 ## Current experience
 
-- 50 typed clothing products across Women, Men, Unisex, Kids, and Babies
+- 51 typed clothing products across Women, Men, Unisex, Kids, and Fandom Edit
+- 51 individually optimized 4:5 catalogue images with stable product IDs and product-specific garment details
 - Search with practical typo tolerance, URL-based category and product filters, sorting, stock states, and Show More pagination
 - Responsive product cards with wishlist controls and an explicit size chooser for Quick Add
 - Static-generated product routes with fit, fabric, care, delivery, illustrative reviews, and related pieces

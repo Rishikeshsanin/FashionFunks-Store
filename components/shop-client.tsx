@@ -8,7 +8,7 @@ import { SortMenu } from "@/components/sort-menu";
 import { SupportingDescriptionCarousel } from "@/components/supporting-description-carousel";
 import { useDialogFocus } from "@/components/use-dialog-focus";
 import { categoryCatalogCopy, defaultCatalogCopy } from "@/data/site-copy";
-import { filterProducts, getCatalogFacets, type CatalogFilters } from "@/lib/catalog";
+import { filterProducts, getCatalogFacets, productBelongsToCategory, type CatalogFilters } from "@/lib/catalog";
 import { categories, type Category, type SortOption } from "@/types/catalog";
 import { products as allProducts } from "@/data/products";
 
@@ -61,7 +61,7 @@ export function ShopClient() {
   const activeCount = [...searchParams.keys()].filter((key) => key !== "sort").length;
   const categoryTitle = filters.category ?? (filters.query ? `Results for “${filters.query}”` : "New in");
   const heroCopy = filters.category ? categoryCatalogCopy[filters.category] : defaultCatalogCopy;
-  const subcategories = [...new Set(allProducts.filter((product) => !filters.category || product.category === filters.category).map((product) => product.subcategory))].sort();
+  const subcategories = [...new Set(allProducts.filter((product) => !filters.category || productBelongsToCategory(product, filters.category)).map((product) => product.subcategory))].sort();
 
   function updateParam(name: string, value?: string) {
     const next = new URLSearchParams(searchParams.toString());
@@ -80,7 +80,7 @@ export function ShopClient() {
       <div className="filter-panel__mobile-head"><strong>Filter the edit</strong><button ref={filterCloseRef} type="button" aria-label="Close filters" onClick={closeFilters}><CloseIcon /></button></div>
       <FilterGroup title="Category">
         <label className="check-row"><input type="radio" name="category" checked={!filters.category} onChange={() => updateParam("category")} /><span>All clothing</span><small>{allProducts.length}</small></label>
-        {categories.map((category) => <label className="check-row" key={category}><input type="radio" name="category" checked={filters.category === category} onChange={() => updateParam("category", category)} /><span>{category}</span><small>{allProducts.filter((product) => product.category === category).length}</small></label>)}
+        {categories.map((category) => <label className="check-row" key={category}><input type="radio" name="category" checked={filters.category === category} onChange={() => updateParam("category", category)} /><span>{category}</span><small>{allProducts.filter((product) => productBelongsToCategory(product, category)).length}</small></label>)}
       </FilterGroup>
       <FilterGroup title="Type">
         {subcategories.map((subcategory) => <label className="check-row" key={subcategory}><input type="radio" name="subcategory" checked={filters.subcategory === subcategory} onChange={() => updateParam("subcategory", filters.subcategory === subcategory ? undefined : subcategory)} /><span>{subcategory}</span></label>)}

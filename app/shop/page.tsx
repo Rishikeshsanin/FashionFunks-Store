@@ -5,7 +5,7 @@ import { ShopClient } from "@/components/shop-client";
 
 export const metadata: Metadata = {
   title: "Shop clothing",
-  description: "Browse the complete FashionFunks clothing edit for women, men, unisex, kids and babies.",
+  description: "Browse the complete FashionFunks clothing edit for women, men, unisex, kids and fandom-inspired style.",
 };
 
 export default function ShopPage() {

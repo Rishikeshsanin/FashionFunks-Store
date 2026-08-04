@@ -1,12 +1,28 @@
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { products } from "@/data/products";
 import { filterProducts, getProductBySlug, getRelatedProducts } from "@/lib/catalog";
 import { categories } from "@/types/catalog";
 
 describe("catalog", () => {
-  it("contains 50 pieces across every agreed category", () => {
-    expect(products).toHaveLength(50);
+  it("contains 51 pieces across every agreed category", () => {
+    expect(products).toHaveLength(51);
     for (const category of categories) expect(products.some((product) => product.category === category)).toBe(true);
+  });
+
+  it("uses unique stable identities and valid local images", () => {
+    expect(new Set(products.map((product) => product.id)).size).toBe(products.length);
+    expect(new Set(products.map((product) => product.slug)).size).toBe(products.length);
+    for (const product of products) {
+      expect(existsSync(join(process.cwd(), "public", product.image))).toBe(true);
+    }
+  });
+
+  it("surfaces the kids fandom dress without duplicating its product record", () => {
+    const fandomResults = filterProducts({ category: "Fandom Edit" });
+    expect(fandomResults.some((product) => product.slug === "spark-tutu-dress")).toBe(true);
+    expect(products.filter((product) => product.slug === "spark-tutu-dress")).toHaveLength(1);
   });
 
   it("filters by category and availability", () => {

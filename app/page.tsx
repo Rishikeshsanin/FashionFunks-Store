@@ -9,9 +9,9 @@ const featured = products.filter((product) => product.featured).slice(0, 8);
 const bestsellers = products.filter((product) => product.bestseller).slice(0, 4);
 
 const categoryTiles = [
-  { label: "Women", copy: "Soft forms. Strong colour.", image: "/assets/images/products/sculpted-rib-top.webp" },
-  { label: "Men", copy: "Clean layers. Easy fits.", image: "/assets/images/products/mens-oxford-shirt.webp" },
-  { label: "Unisex", copy: "No labels. Great clothes.", image: "/assets/images/products/lilac-studio-tee.webp" },
+  { label: "Women", copy: "Soft forms. Strong colour.", image: "/assets/images/products/women/sculpted-rib-top.webp" },
+  { label: "Men", copy: "Clean layers. Easy fits.", image: "/assets/images/products/men/oxford-ease-shirt.webp" },
+  { label: "Unisex", copy: "No labels. Great clothes.", image: "/assets/images/products/unisex/lilac-studio-tee.webp" },
 ] as const;
 
 export default function HomePage() {
@@ -59,14 +59,14 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-          <div className="small-category-links"><Link href="/shop?category=Kids">Kids edit <span>↗</span></Link><Link href="/shop?category=Babies">Baby essentials <span>↗</span></Link></div>
+          <div className="small-category-links"><Link href="/shop?category=Kids">Kids edit <span>↗</span></Link><Link href="/shop?category=Fandom%20Edit">Fandom edit <span>↗</span></Link></div>
         </div>
       </section>
 
       <section className="section editorial-feature">
         <div className="container editorial-feature__grid">
           <div className="editorial-feature__image">
-            <Image src="/assets/images/products/rouge-statement-jacket.png" alt="Rouge statement jacket from FashionFunks" fill sizes="(max-width: 800px) 100vw, 52vw" />
+            <Image src="/assets/images/products/women/rouge-statement-jacket.webp" alt="Rouge statement jacket from FashionFunks" fill sizes="(max-width: 800px) 100vw, 52vw" />
             <span>Colour story / 02</span>
           </div>
           <div className="editorial-feature__copy">

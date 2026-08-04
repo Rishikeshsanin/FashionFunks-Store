@@ -1,0 +1,83 @@
+FASHIONFUNKS CATALOGUE IMAGE RELEASE
+===================================
+
+Working branch
+--------------
+agent/catalog-image-release, created from the latest origin/main after the
+accessible category carousel release was merged.
+
+Git safety
+----------
+No commit, push, pull request, merge, branch deletion or Git history rewrite
+was performed for this release.
+
+Catalogue
+---------
+- Replaced the Babies category with Fandom Edit.
+- Expanded the catalogue from 50 to 51 products.
+- Preserved IDs FF-001 through FF-042 for the existing Women, Men, Unisex and
+  Kids products.
+- Reserved the retired baby-product IDs FF-043 through FF-050 so saved browser
+  data cannot silently point to unrelated products.
+- Added new IDs FF-051 through FF-059 for the fandom release.
+- Kept Spark Tutu Dress as a Kids product and made it discoverable inside
+  Fandom Edit through an additional category association, without duplicating
+  its product record.
+- Added product-specific descriptions, fabrics, fits, care directions, colours,
+  sizes, prices, stock states and badges.
+
+Images
+------
+- Prepared all 51 supplied images as consistent 1000 x 1250 WebP assets.
+- Organized product imagery into women, men, unisex, kids and fandom folders.
+- Preserved source proportions without stretching.
+- Used careful padding for narrower source artwork rather than destructive
+  cropping.
+- Preserved genuine transparency on the Midnight Bomber asset.
+- Replaced the baked checkerboard behind Noir City Jacket with a clean warm
+  neutral catalogue background.
+- Reduced the supplied image payload from approximately 79 MB of PNG sources
+  to approximately 2.4 MB of web-ready catalogue imagery.
+- Retained the original supplied ZIP outside the repository; source PNG files
+  were not modified.
+
+Storefront integration
+----------------------
+- Updated the shop category navigation, filters, category counts, search and
+  supporting-description carousel for Fandom Edit.
+- Updated homepage, Lookbook and About imagery to use the new catalogue paths.
+- Updated footer, mobile navigation, page metadata and project documentation.
+- Added category matching that supports one product appearing in an additional
+  edit without duplicating cart or wishlist identity.
+- Kept the existing page layout and purchasing behavior unchanged.
+
+Database readiness
+------------------
+- Added a forward-only Supabase migration allowing Fandom Edit and retiring
+  Babies from the product-category constraint.
+- Left the original migration history unchanged.
+
+Verification
+------------
+- ESLint: passed.
+- TypeScript type checking: passed.
+- Vitest: 9 tests passed across 2 test files.
+- Catalogue integrity: all 51 product IDs and slugs are unique, every referenced
+  image exists, and all 51 prepared images are exactly 1000 x 1250.
+- Next.js production build: passed; 72 static pages were generated, including
+  all 51 product detail pages.
+- Desktop browser review: passed for homepage navigation, Fandom Edit, product
+  imagery, Noir City Jacket details and add-to-bag feedback.
+- Mobile browser review at 390 x 844: passed for the two-column product grid,
+  horizontal category navigation and mobile menu accessibility.
+- Mobile menu keyboard behavior: Escape closes the menu, updates ARIA state and
+  returns focus to the menu trigger.
+- Browser console: no warnings or runtime errors were recorded during review.
+- The standalone Playwright CLI runner was attempted twice but hung before
+  emitting test results in this desktop environment. Equivalent release flows
+  were completed successfully through the connected local browser; no
+  storefront failure was observed.
+
+Local preview
+-------------
+The verified development server runs at http://127.0.0.1:4173/.

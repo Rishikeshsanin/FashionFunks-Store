@@ -3,7 +3,7 @@ import { Logo } from "@/components/logo";
 import { NewsletterForm } from "@/components/newsletter-form";
 
 const footerGroups = [
-  { title: "Shop", links: [["New in", "/shop"], ["Women", "/shop?category=Women"], ["Men", "/shop?category=Men"], ["Unisex", "/shop?category=Unisex"], ["Kids & babies", "/shop?category=Kids"]] },
+  { title: "Shop", links: [["New in", "/shop"], ["Women", "/shop?category=Women"], ["Men", "/shop?category=Men"], ["Unisex", "/shop?category=Unisex"], ["Kids", "/shop?category=Kids"], ["Fandom Edit", "/shop?category=Fandom%20Edit"]] },
   { title: "Discover", links: [["Lookbook", "/lookbook"], ["About us", "/about"], ["Your account", "/login"], ["Wishlist", "/wishlist"]] },
   { title: "Need help?", links: [["Delivery & returns", "/delivery-returns"], ["Size guide", "/size-guide"], ["Contact", "/contact"], ["FAQ", "/faq"]] },
 ] as const;
