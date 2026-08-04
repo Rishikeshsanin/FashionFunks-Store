@@ -1,4 +1,4 @@
-export const categories = ["Women", "Men", "Unisex", "Kids", "Babies"] as const;
+export const categories = ["Women", "Men", "Unisex", "Kids", "Fandom Edit"] as const;
 
 export type Category = (typeof categories)[number];
 
@@ -7,6 +7,7 @@ export type Product = {
   slug: string;
   name: string;
   category: Category;
+  additionalCategories?: Category[];
   subcategory: string;
   description: string;
   price: number;

@@ -15,7 +15,7 @@ FashionFunks uses the Next.js App Router and separates routes, reusable interfac
 |-- public/
 |   `-- assets/images/
 |       |-- editorial/           # Campaign imagery
-|       `-- products/            # Product imagery
+|       `-- products/            # Optimized product imagery grouped by catalogue category
 |-- supabase/
 |   |-- migrations/              # PostgreSQL schema and RLS policies
 |   `-- README.md                # Persistence boundary and setup notes

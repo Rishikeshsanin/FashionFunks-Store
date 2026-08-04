@@ -52,13 +52,13 @@ export const categoryCatalogCopy: Record<Category, CatalogHeroCopy> = {
       "Everyday favourites with reliable comfort and just enough personality.",
     ],
   },
-  Babies: {
-    eyebrow: "Little pieces, thoughtfully made",
+  "Fandom Edit": {
+    eyebrow: "Icons, reworked",
     descriptions: [
-      "Soft, comfortable essentials designed for little movements and everyday ease.",
-      "Gentle layers and practical fits made for busy everyday changes.",
-      "Breathable basics for naps, play and everything in between.",
-      "Thoughtful babywear with soft fabrics, easy layering and lasting comfort.",
+      "Graphic layers and statement pieces built for fans with a sharp eye for style.",
+      "Recognisable references meet modern fits, premium weight and everyday wearability.",
+      "Fan favourites, reworked through clean silhouettes and considered streetwear details.",
+      "Character-led graphics and collectible layers designed beyond convention season.",
     ],
   },
 };

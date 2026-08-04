@@ -6,10 +6,10 @@ import { ArrowIcon } from "@/components/icons";
 export const metadata: Metadata = { title: "Lookbook", description: "The FashionFunks styling lookbook: colour, texture and easy silhouettes." };
 
 const stories = [
-  { number: "01", title: "Cobalt after quiet", copy: "Let one clean colour do the talking. White, stone and ink keep the rest of the sentence short.", image: "/assets/images/products/cobalt-poplin-top.webp", href: "/shop?color=Cobalt", position: "tall" },
-  { number: "02", title: "The new soft suit", copy: "Shirting, wide trousers and relaxed layers with the stiffness edited out.", image: "/assets/images/products/mens-oxford-shirt.webp", href: "/shop?subcategory=Shirts", position: "wide" },
-  { number: "03", title: "Rouge in motion", copy: "A statement jacket, an uncomplicated base and nowhere you need to blend in.", image: "/assets/images/products/rouge-statement-jacket.png", href: "/shop?color=Rouge", position: "wide" },
-  { number: "04", title: "Shared wardrobes", copy: "Boxy tees and easy outerwear made to be styled, borrowed and restyled.", image: "/assets/images/products/lilac-studio-tee.webp", href: "/shop?category=Unisex", position: "tall" },
+  { number: "01", title: "Cobalt after quiet", copy: "Let one clean colour do the talking. White, stone and ink keep the rest of the sentence short.", image: "/assets/images/products/women/cobalt-poplin-top.webp", href: "/shop?color=Cobalt", position: "tall" },
+  { number: "02", title: "The new soft suit", copy: "Shirting, wide trousers and relaxed layers with the stiffness edited out.", image: "/assets/images/products/men/oxford-ease-shirt.webp", href: "/shop?subcategory=Shirts", position: "wide" },
+  { number: "03", title: "Rouge in motion", copy: "A statement jacket, an uncomplicated base and nowhere you need to blend in.", image: "/assets/images/products/women/rouge-statement-jacket.webp", href: "/shop?color=Rouge", position: "wide" },
+  { number: "04", title: "Shared wardrobes", copy: "Boxy tees and easy outerwear made to be styled, borrowed and restyled.", image: "/assets/images/products/unisex/lilac-studio-tee.webp", href: "/shop?category=Unisex", position: "tall" },
 ] as const;
 
 export default function LookbookPage() {

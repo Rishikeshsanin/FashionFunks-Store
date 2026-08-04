@@ -29,6 +29,6 @@ test("mobile navigation exposes every shopping and account route", async ({ page
   test.skip(!testInfo.project.name.startsWith("mobile"), "mobile breakpoint only");
   await page.goto("/");
   await page.getByRole("button", { name: "Open menu" }).click();
-  await expect(page.getByRole("link", { name: /Babies/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Fandom Edit/ })).toBeVisible();
   await expect(page.getByRole("link", { name: "Log in or create an account" })).toBeVisible();
 });
