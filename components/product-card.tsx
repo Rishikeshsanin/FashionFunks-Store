@@ -25,21 +25,29 @@ export function ProductCard({ product, priority = false }: { product: Product; p
     <article className="product-card">
       <div className="product-card__media">
         <Link href={`/product/${product.slug}`} aria-label={`View ${product.name}`}>
-          <Image src={product.image} alt={product.imageAlt} fill sizes="(max-width: 640px) 50vw, (max-width: 1100px) 33vw, 25vw" priority={priority} loading={priority ? "eager" : "lazy"} />
+          <Image
+            src={product.image}
+            alt={product.imageAlt}
+            fill
+            quality={90}
+            sizes="(max-width: 520px) 50vw, (max-width: 820px) 50vw, (max-width: 1180px) 33vw, 25vw"
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+          />
         </Link>
         <div className="product-card__badges">
           {product.badge && <span>{product.badge}</span>}
-          {discount > 0 && <span className="sale-badge">−{discount}%</span>}
+          {discount >= 10 && <span className="sale-badge">Save {discount}%</span>}
         </div>
         <button className={`wishlist-button${wished ? " wishlist-button--active" : ""}`} type="button" aria-label={`${wished ? "Remove" : "Add"} ${product.name} ${wished ? "from" : "to"} wishlist`} onClick={() => toggleWishlist(product.id)}>
           <HeartIcon filled={wished} />
         </button>
         <button className="quick-add-button" type="button" disabled={product.stock === 0} onClick={() => setPickerOpen((value) => !value)} aria-expanded={pickerOpen}>
-          <PlusIcon />{product.stock === 0 ? "Sold out" : "Quick add"}
+          <PlusIcon />{product.stock === 0 ? "Sold out" : "Choose size"}
         </button>
         {pickerOpen && (
           <div className="quick-picker">
-            <div className="quick-picker__top"><span>Choose a size</span><button type="button" onClick={() => setPickerOpen(false)}>Close</button></div>
+            <div className="quick-picker__top"><span>Add to bag</span><button type="button" onClick={() => setPickerOpen(false)}>Close</button></div>
             {product.colors.length > 1 && (
               <label>Colour<select value={selectedColor} onChange={(event) => setSelectedColor(event.target.value)}>{product.colors.map((color) => <option key={color}>{color}</option>)}</select></label>
             )}
