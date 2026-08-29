@@ -2,99 +2,105 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowIcon } from "@/components/icons";
 import { ProductGrid } from "@/components/product-grid";
-import { SectionHeading } from "@/components/section-heading";
-import { collections, products } from "@/data/products";
+import { products } from "@/data/products";
 
-const featured = products.filter((product) => product.featured).slice(0, 8);
-const bestsellers = products.filter((product) => product.bestseller).slice(0, 4);
+const featured = products.filter((product) => product.featured && product.stock > 0).slice(0, 8);
+const bestsellers = products.filter((product) => product.bestseller && product.stock > 0).slice(0, 4);
 
-const categoryTiles = [
-  { label: "Women", copy: "Soft forms. Strong colour.", image: "/assets/images/products/women/sculpted-rib-top.webp" },
-  { label: "Men", copy: "Clean layers. Easy fits.", image: "/assets/images/products/men/oxford-ease-shirt.webp" },
-  { label: "Unisex", copy: "No labels. Great clothes.", image: "/assets/images/products/unisex/lilac-studio-tee.webp" },
+const heroProducts = [
+  { name: "Sculpted Rib Top", price: "₹1,599", image: "/assets/images/products/women/sculpted-rib-top.webp", href: "/product/sculpted-rib-top" },
+  { name: "Oxford Ease Shirt", price: "₹1,899", image: "/assets/images/products/men/oxford-ease-shirt.webp", href: "/product/oxford-ease-shirt" },
+  { name: "Lilac Studio Tee", price: "₹1,299", image: "/assets/images/products/unisex/lilac-studio-tee.webp", href: "/product/lilac-studio-tee" },
+] as const;
+
+const categories = [
+  { label: "Women", copy: "Modern colour, easy shape.", image: "/assets/images/products/women/cobalt-poplin-top.webp", href: "/shop?category=Women" },
+  { label: "Men", copy: "Relaxed tailoring, repeat wear.", image: "/assets/images/products/men/coastal-stripe-shirt.webp", href: "/shop?category=Men" },
+  { label: "Unisex", copy: "Good clothes. No labels needed.", image: "/assets/images/products/unisex/everywhere-hoodie.webp", href: "/shop?category=Unisex" },
 ] as const;
 
 export default function HomePage() {
   return (
     <>
-      <section className="home-hero">
-        <Image className="home-hero__image" src="/assets/images/editorial/hero-campaign.png" alt="FashionFunks models in a vivid editorial setting" fill priority sizes="100vw" />
-        <div className="home-hero__veil" />
-        <div className="container home-hero__content">
-          <span className="eyebrow eyebrow--light">The new everyday, edited</span>
-          <h1>Wear what<br />moves you.</h1>
-          <p>Clean silhouettes, expressive colour and made-to-repeat essentials for every version of you.</p>
-          <div className="button-row">
-            <Link className="button button--light" href="/shop">Shop new arrivals</Link>
-            <Link className="button button--glass" href="/lookbook">Explore the lookbook<ArrowIcon /></Link>
+      <section className="v3-hero">
+        <div className="v3-hero__copy">
+          <span className="v3-eyebrow">India · New season</span>
+          <h1>Good clothes.<em>No noise.</em></h1>
+          <p>A tightly edited wardrobe of shirts, tees, dresses, trousers and layers — priced for real life, styled to feel anything but ordinary.</p>
+          <div className="v3-hero__actions">
+            <Link className="v3-button v3-button--dark" href="/shop">Shop the collection <ArrowIcon /></Link>
+            <Link className="v3-button" href="/lookbook">View the lookbook</Link>
+          </div>
+          <div className="v3-hero__micro" aria-label="Store highlights">
+            <span><strong>₹799+</strong>Everyday entry price</span>
+            <span><strong>15 days</strong>Easy returns</span>
+            <span><strong>Local HD</strong>Product imagery</span>
           </div>
         </div>
-        <div className="home-hero__edition"><span>Edition 02</span><span>India · 2026</span></div>
-      </section>
-
-      <section className="service-bar" aria-label="Store benefits">
-        <div className="container service-bar__grid">
-          <div><span>01</span><p><strong>Fresh weekly edits</strong>New pieces, thoughtfully chosen</p></div>
-          <div><span>02</span><p><strong>Easy 15-day returns</strong>Change your mind, stress-free</p></div>
-          <div><span>03</span><p><strong>Style without rules</strong>Made for self-expression</p></div>
+        <div className="v3-hero__visual" aria-label="Featured products">
+          {heroProducts.map((product, index) => (
+            <Link className="v3-hero-card" href={product.href} key={product.name}>
+              <Image src={product.image} alt={product.name} fill priority={index === 0} quality={92} sizes={index === 0 ? "(max-width: 820px) 58vw, 34vw" : "(max-width: 820px) 42vw, 22vw"} />
+              <span className="v3-hero-card__label"><strong>{product.name}</strong><span>{product.price}</span></span>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <SectionHeading eyebrow="Just landed" title="New in rotation" copy="The newest shapes, colours and layers — ready to earn repeat status." href="/shop" linkLabel="View all new arrivals" />
+      <div className="v3-proof" aria-label="Why shop FashionFunks">
+        <div><strong>Local, crisp imagery</strong><span>1000×1250 catalogue masters with responsive Next/Image delivery.</span></div>
+        <div><strong>India-first pricing</strong><span>Mid-market pricing instead of blind USD-to-INR conversion.</span></div>
+        <div><strong>Free delivery ₹1,999+</strong><span>A simple threshold you can see before checkout.</span></div>
+        <div><strong>15-day returns</strong><span>Clear demo-store policy, no hidden shopping friction.</span></div>
+      </div>
+
+      <section className="v3-section">
+        <div className="v3-shell">
+          <div className="v3-section-head">
+            <div><span className="v3-eyebrow">Freshly added</span><h2>New in rotation.</h2></div>
+            <p>Pieces chosen for repeat wear, not one-scroll novelty. Clean fits, useful colour and prices that still make sense.</p>
+          </div>
           <ProductGrid products={featured} priorityCount={4} />
         </div>
       </section>
 
-      <section className="section section--ink category-edit">
-        <div className="container">
-          <SectionHeading eyebrow="Find your lane" title="Shop by mood" copy="Three edits, one wardrobe. Go polished, relaxed or beautifully in between." />
-          <div className="category-tiles">
-            {categoryTiles.map((tile, index) => (
-              <Link key={tile.label} className="category-tile" href={`/shop?category=${tile.label}`}>
-                <Image src={tile.image} alt={`${tile.label} clothing edit`} fill sizes="(max-width: 760px) 100vw, 33vw" />
-                <span className="category-tile__index">0{index + 1}</span>
-                <span className="category-tile__content"><span><strong>{tile.label}</strong><small>{tile.copy}</small></span><i>↗</i></span>
+      <section className="v3-section v3-section--ink">
+        <div className="v3-shell">
+          <div className="v3-section-head">
+            <div><span className="v3-eyebrow">Shop by edit</span><h2>Pick a direction.</h2></div>
+            <p>Not a wall of categories. Three clear ways into the wardrobe, with the rest waiting inside the full collection.</p>
+          </div>
+          <div className="v3-category-grid">
+            {categories.map((category) => (
+              <Link className="v3-category" href={category.href} key={category.label}>
+                <Image src={category.image} alt={`${category.label} fashion collection`} fill quality={92} sizes="(max-width: 820px) 100vw, 34vw" />
+                <span className="v3-category__copy"><span><h3>{category.label}</h3><p>{category.copy}</p></span><span>↗</span></span>
               </Link>
             ))}
           </div>
-          <div className="small-category-links"><Link href="/shop?category=Kids">Kids edit <span>↗</span></Link><Link href="/shop?category=Fandom%20Edit">Fandom edit <span>↗</span></Link></div>
         </div>
       </section>
 
-      <section className="section editorial-feature">
-        <div className="container editorial-feature__grid">
-          <div className="editorial-feature__image">
-            <Image src="/assets/images/products/women/rouge-statement-jacket.webp" alt="Rouge statement jacket from FashionFunks" fill sizes="(max-width: 800px) 100vw, 52vw" />
-            <span>Colour story / 02</span>
+      <section className="v3-section v3-section--soft">
+        <div className="v3-shell">
+          <div className="v3-section-head">
+            <div><span className="v3-eyebrow">Most wanted</span><h2>The repeat-wear list.</h2></div>
+            <Link className="v3-link" href="/shop?sort=rating">See all favourites →</Link>
           </div>
-          <div className="editorial-feature__copy">
-            <span className="eyebrow">The colour issue</span>
-            <h2>Minimal doesn’t mean invisible.</h2>
-            <p>Start with an easy foundation. Add one unapologetic colour. Keep everything else beautifully quiet.</p>
-            <Link className="arrow-link" href="/shop?color=Rouge">Shop statement pieces<ArrowIcon /></Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--soft">
-        <div className="container">
-          <SectionHeading eyebrow="Most wanted" title="Community favourites" copy="Easy shapes, confident details and zero overthinking." href="/shop?sort=rating" linkLabel="See every favourite" />
           <ProductGrid products={bestsellers} />
         </div>
       </section>
 
-      <section className="section lookbook-preview">
-        <div className="container">
-          <SectionHeading eyebrow="The styling desk" title="Three ways into the season" href="/lookbook" linkLabel="Open the lookbook" />
-          <div className="collection-row">
-            {collections.map((collection, index) => (
-              <Link key={collection.title} href={collection.href} className="collection-card">
-                <div><Image src={collection.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" /></div>
-                <span>Story 0{index + 1}</span><h3>{collection.title}</h3><p>{collection.copy}</p>
-              </Link>
-            ))}
+      <section className="v3-section">
+        <div className="v3-shell editorial-feature__grid">
+          <div className="editorial-feature__image">
+            <Image src="/assets/images/products/men/sand-knit-overshirt.webp" alt="Sand Knit Overshirt" fill quality={92} sizes="(max-width: 800px) 100vw, 52vw" />
+          </div>
+          <div className="editorial-feature__copy">
+            <span className="v3-eyebrow">One-piece upgrade</span>
+            <h2 className="v3-title">Dress better without making it a project.</h2>
+            <p>Start with a clean base. Add one strong layer. Keep the palette quiet. The easiest outfits are usually the ones you actually repeat.</p>
+            <Link className="v3-button v3-button--dark" href="/shop?subcategory=Outerwear">Shop layers <ArrowIcon /></Link>
           </div>
         </div>
       </section>
