@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { ChevronIcon, CloseIcon, SearchIcon } from "@/components/icons";
 import { ProductGrid } from "@/components/product-grid";
 import { SortMenu } from "@/components/sort-menu";
@@ -26,6 +26,7 @@ export function ShopClient() {
   const router = useRouter();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState(searchParams.get("q") ?? "");
   const filterDialogRef = useRef<HTMLDivElement>(null);
   const filterCloseRef = useRef<HTMLButtonElement>(null);
   const facets = useMemo(() => getCatalogFacets(), []);
@@ -49,6 +50,7 @@ export function ShopClient() {
   }, [searchParams]);
 
   useEffect(() => setVisibleCount(PAGE_SIZE), [paramsKey]);
+  useEffect(() => setSearchInput(searchParams.get("q") ?? ""), [paramsKey, searchParams]);
   useEffect(() => {
     document.body.classList.toggle("no-scroll", filtersOpen);
     return () => document.body.classList.remove("no-scroll");
@@ -58,8 +60,8 @@ export function ShopClient() {
 
   const matches = useMemo(() => filterProducts(filters), [filters]);
   const visible = matches.slice(0, visibleCount);
-  const activeCount = [...searchParams.keys()].filter((key) => key !== "sort").length;
-  const categoryTitle = filters.category ?? (filters.query ? `Results for “${filters.query}”` : "New in");
+  const activeCount = [...searchParams.keys()].filter((key) => key !== "sort" && key !== "q").length;
+  const categoryTitle = filters.category ?? (filters.query ? `Results for “${filters.query}”` : "The collection");
   const heroCopy = filters.category ? categoryCatalogCopy[filters.category] : defaultCatalogCopy;
   const subcategories = [...new Set(allProducts.filter((product) => !filters.category || productBelongsToCategory(product, filters.category)).map((product) => product.subcategory))].sort();
 
@@ -70,14 +72,28 @@ export function ShopClient() {
     router.replace(`${pathname}${next.size ? `?${next.toString()}` : ""}`, { scroll: false });
   }
 
+  function submitSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    updateParam("q", searchInput.trim() || undefined);
+  }
+
+  function clearSearch() {
+    setSearchInput("");
+    updateParam("q");
+  }
+
   function clearFilters() {
+    const next = new URLSearchParams();
     const sort = searchParams.get("sort");
-    router.replace(`${pathname}${sort ? `?sort=${sort}` : ""}`, { scroll: false });
+    const q = searchParams.get("q");
+    if (sort) next.set("sort", sort);
+    if (q) next.set("q", q);
+    router.replace(`${pathname}${next.size ? `?${next.toString()}` : ""}`, { scroll: false });
   }
 
   const filterPanel = (
     <div className="filter-panel">
-      <div className="filter-panel__mobile-head"><strong>Filter the edit</strong><button ref={filterCloseRef} type="button" aria-label="Close filters" onClick={closeFilters}><CloseIcon /></button></div>
+      <div className="filter-panel__mobile-head"><strong>Filter products</strong><button ref={filterCloseRef} type="button" aria-label="Close filters" onClick={closeFilters}><CloseIcon /></button></div>
       <FilterGroup title="Category">
         <label className="check-row"><input type="radio" name="category" checked={!filters.category} onChange={() => updateParam("category")} /><span>All clothing</span><small>{allProducts.length}</small></label>
         {categories.map((category) => <label className="check-row" key={category}><input type="radio" name="category" checked={filters.category === category} onChange={() => updateParam("category", category)} /><span>{category}</span><small>{allProducts.filter((product) => productBelongsToCategory(product, category)).length}</small></label>)}
@@ -99,8 +115,8 @@ export function ShopClient() {
         <label className="check-row"><input type="checkbox" checked={filters.minRating === 4.5} onChange={(event) => updateParam("rating", event.target.checked ? "4.5" : undefined)} /><span>Rated 4.5+</span></label>
         <label className="check-row"><input type="checkbox" checked={filters.minDiscount === 10} onChange={(event) => updateParam("discount", event.target.checked ? "10" : undefined)} /><span>10% off or more</span></label>
       </FilterGroup>
-      {activeCount > 0 && <button className="text-button" type="button" onClick={clearFilters}>Clear all filters</button>}
-      <button className="button button--primary filter-apply" type="button" onClick={closeFilters}>Show {matches.length} pieces</button>
+      {activeCount > 0 && <button className="text-button" type="button" onClick={clearFilters}>Clear filters</button>}
+      <button className="button button--primary filter-apply" type="button" onClick={closeFilters}>Show {matches.length} products</button>
     </div>
   );
 
@@ -108,11 +124,11 @@ export function ShopClient() {
     <>
       <header className="shop-hero">
         <div className="container">
-          <span className="eyebrow">{filters.query ? "Your search, thoughtfully filtered" : heroCopy.eyebrow}</span>
+          <span className="v3-eyebrow">{filters.query ? "Search results" : heroCopy.eyebrow}</span>
           <div>
             <h1>{categoryTitle}</h1>
             {filters.query
-              ? <p>Explore the closest matches across pieces, colours, categories and collections.</p>
+              ? <p>{matches.length} matching pieces across the FashionFunks wardrobe.</p>
               : <SupportingDescriptionCarousel descriptions={heroCopy.descriptions} />}
           </div>
           <nav className="category-pills" aria-label="Shop categories">
@@ -121,8 +137,18 @@ export function ShopClient() {
           </nav>
         </div>
       </header>
+
+      <div className="container v3-shop-search-wrap">
+        <form className="v3-shop-search" role="search" onSubmit={submitSearch}>
+          <SearchIcon />
+          <input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} aria-label="Search products" placeholder="Search shirts, dresses, colours, collections…" autoComplete="off" />
+          {searchInput && <button className="v3-shop-search__clear" type="button" onClick={clearSearch}>Clear</button>}
+          <button type="submit">Search</button>
+        </form>
+      </div>
+
       <div className="container shop-toolbar">
-        <div aria-live="polite"><strong>{matches.length}</strong> pieces</div>
+        <div aria-live="polite"><strong>{matches.length}</strong> products</div>
         <div>
           <button className="filter-trigger" type="button" onClick={() => setFiltersOpen(true)}>Filters{activeCount > 0 && <span>{activeCount}</span>}</button>
           <SortMenu value={filters.sort ?? "newest"} onChange={(value) => updateParam("sort", value)} />
@@ -137,7 +163,7 @@ export function ShopClient() {
               {visibleCount < matches.length && <div className="show-more"><p>Showing {visible.length} of {matches.length}</p><button className="button button--outline" type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>Show more</button></div>}
             </>
           ) : (
-            <div className="catalog-empty"><SearchIcon /><h2>No pieces match this edit.</h2><p>Try clearing one or two filters — your next favourite may be close.</p><button className="button button--primary" type="button" onClick={clearFilters}>Clear filters</button></div>
+            <div className="catalog-empty"><SearchIcon /><h2>No products found.</h2><p>Try a broader search or remove one of the filters.</p><button className="button button--primary" type="button" onClick={() => { clearSearch(); clearFilters(); }}>Reset shop</button></div>
           )}
         </section>
       </div>
