@@ -20,11 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product not found" };
-  return {
-    title: product.name,
-    description: product.description,
-    openGraph: { images: [product.image] },
-  };
+  return { title: product.name, description: product.description, openGraph: { images: [product.image] } };
 }
 
 export default async function ProductPage({ params }: Props) {
@@ -39,11 +35,11 @@ export default async function ProductPage({ params }: Props) {
       <div className="container product-breadcrumbs"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: product.category, href: `/shop?category=${product.category}` }, { label: product.name }]} /></div>
       <section className="container product-detail">
         <div className="product-gallery">
-          <div className="product-gallery__main"><div className="product-gallery__media"><Image src={product.image} alt={product.imageAlt} fill loading="eager" fetchPriority="high" sizes="(max-width: 850px) 100vw, 58vw" />{product.badge && <span className="product-gallery__badge">{product.badge}</span>}</div></div>
-          <div className="product-gallery__note"><span>Front view</span><span>Editorial image</span></div>
+          <div className="product-gallery__main"><div className="product-gallery__media"><Image src={product.image} alt={product.imageAlt} fill quality={92} loading="eager" fetchPriority="high" sizes="(max-width: 850px) 100vw, 58vw" />{product.badge && <span className="product-gallery__badge">{product.badge}</span>}</div></div>
+          <div className="product-gallery__note"><span>High-resolution product view</span><span>{product.id}</span></div>
         </div>
         <div className="product-summary">
-          <span className="eyebrow">{product.category} / {product.subcategory}</span>
+          <span className="v3-eyebrow">{product.category} / {product.subcategory}</span>
           <h1>{product.name}</h1>
           <div className="product-summary__rating"><span aria-label={`${product.rating} out of 5 stars`}>★★★★★</span><Link href="#reviews">{product.rating} · {product.reviewCount} reviews</Link></div>
           <div className="product-summary__price"><strong>{formatMoney(product.price)}</strong>{product.compareAtPrice && <s>{formatMoney(product.compareAtPrice)}</s>}{discount > 0 && <span>Save {discount}%</span>}</div>
@@ -58,14 +54,14 @@ export default async function ProductPage({ params }: Props) {
       </section>
       <section className="section product-story">
         <div className="container product-story__grid">
-          <div><span className="eyebrow">Why it works</span><h2>Designed for the repeat-wear list.</h2></div>
-          <div><p>Easy to style, comfortable in motion and considered in every proportion. This is the kind of piece that makes getting dressed feel obvious.</p><ul><li>Comfort-first construction</li><li>Made to mix across the collection</li><li>Finished with considered details</li></ul></div>
+          <div><span className="v3-eyebrow">Why it works</span><h2>Made for the repeat-wear list.</h2></div>
+          <div><p>Easy to style, comfortable in motion and considered in proportion. The goal is simple: make the piece you reach for again tomorrow.</p><ul><li>Comfort-first construction</li><li>Designed to mix across the collection</li><li>Clear fit, fabric and care information</li></ul></div>
         </div>
       </section>
       <section id="reviews" className="section review-placeholder">
         <div className="container review-placeholder__grid">
-          <div><span className="eyebrow">Community notes</span><h2>Loved in real wardrobes.</h2><p>Thoughtful notes from customers who made this piece their own.</p></div>
-          <div className="review-score"><strong>{product.rating}</strong><span>★★★★★</span><p>Based on {product.reviewCount} customer ratings</p><button className="button button--outline" type="button" disabled>Write a review</button></div>
+          <div><span className="v3-eyebrow">Community notes</span><h2>Rated by the demo catalogue.</h2><p>Illustrative rating data helps demonstrate a complete storefront experience without pretending these are verified purchases.</p></div>
+          <div className="review-score"><strong>{product.rating}</strong><span>★★★★★</span><p>{product.reviewCount} illustrative ratings</p></div>
         </div>
       </section>
       <section className="section section--soft">
