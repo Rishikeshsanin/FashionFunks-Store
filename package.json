@@ -1,6 +1,6 @@
 {
   "name": "fashionfunks-store",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -23,7 +23,6 @@
   "devDependencies": {
     "@playwright/test": "1.58.2",
     "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/react": "16.3.2",
     "@types/node": "24.10.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
